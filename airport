@@ -1,3 +1,15 @@
+1.Să se implementeze în APEX tabelele bazei de date împreună cu constrângerile necesare pentru păstrarea integrității bazei de date (chei primare, chei externe, constrângere valori).
+2.Să se adauge în tabelele bazei de date folosind INSERT din SQL: 12 zboruri, 30 rezervări,6 destinații, 3 companii, 5 avioane.
+3.Să se creeze o pagină APEX pentru Vizualizare zboruri (toate zborurile din baza de date).
+4.Să se creeze o pagină APEX pentru Vizualizare destinații (toate destinațiile din baza de date)
+5.Să se creeze o pagină APEX pentru Vizualizare pasageri (rezervări) care zboară spre o anumită destinație
+6.Să se creeze o pagină APEX pentru Vizualizare zboruri companii în care se vor afișa toate zborurile realizate de o anumită companie
+7.Să se creeze o pagină APEX pentru Adăugare rezervare.
+8.Să se creeze o pagină APEX pentru Raportare statistici destinații – se va afișa o listă cu:destinație, număr de zboruri spre acea destinație și număr total de locuri in toate avioanele
+care zboară spre acea destinație.
+9.Să se creeze o pagină APEX pentru Raportare statistici zboruri – se va afișa o listă cu:zborID, oraș destinație, țară destinație, număr total de locuri in avionul alocat zborului și
+numărul de rezervări pentru acea destinație.
+
 CREATE TABLE aAvion(
  tipAvi char(10) NOT NULL,
  fabricant VARCHAR2(255),
