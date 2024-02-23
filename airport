@@ -1,0 +1,122 @@
+CREATE TABLE aAvion(
+ tipAvi char(10) NOT NULL,
+ fabricant VARCHAR2(255),
+ nrLocuri NUMBER(3) NOT NULL,
+ CONSTRAINT aAvion_pk PRIMARY KEY(tipAvi)
+);
+
+CREATE TABLE aCompanie(
+ compID CHAR(10) NOT NULL,
+ nume VARCHAR2(255) NOT NULL,
+ tel VARCHAR2(10),
+ sediu VARCHAR2(255) NOT NULL,
+ CONSTRAINT aCompanie_pk PRIMARY KEY (compID)
+);
+
+CREATE TABLE aDestinatie(
+ destinatieID CHAR(10) NOT NULL,
+ oras VARCHAR2(255),
+ tara VARCHAR2(255),
+ numeAeroport VARCHAR2(255),
+ CONSTRAINT aDestinatie_pk PRIMARY KEY(destinatieID)
+);
+
+CREATE TABLE aZbor(
+ zborID CHAR(10) NOT NULL,
+ destinatieID CHAR(10) NOT NULL,
+ oraPlecare VARCHAR2(5),
+ oraSosire VARCHAR(5),
+ compID CHAR(10) NOT NULL,
+ tipAvi CHAR(10) NOT NULL,
+ poarta VARCHAR2(255),
+ CONSTRAINT aZbor_pk PRIMARY KEY(zborID),
+ CONSTRAINT aZbor_aDestinatie_fk FOREIGN KEY (destinatieID)
+REFERENCES aDestinatie(destinatieID),
+ CONSTRAINT aZbor_aCompanie_fk FOREIGN KEY (compID) REFERENCES
+aCompanie(compID),
+ CONSTRAINT aZbor_aAvion_fk FOREIGN KEY (tipAvi) REFERENCES
+aAvion(tipAvi)
+);
+
+CREATE TABLE aRezervare(
+ zborID CHAR(10) NOT NULL,
+ data DATE NOT NULL,
+ cnp VARCHAR2(13) NOT NULL,
+ nume VARCHAR2(255),
+ loc NUMBER(3),
+ CONSTRAINT aRezervare_pk PRIMARY KEY(zborID, data, cnp),
+ CONSTRAINT aRezervare_aZbor_fk FOREIGN KEY (zborID) REFERENCES
+aZbor(zborId)
+);
+
+INSERT INTO aAvion(tipAvi, fabricant, nrLocuri) VALUES ('A320', 'Airbus',150);
+INSERT INTO aAvion(tipAvi, fabricant, nrLocuri) VALUES ('A707', 'Boeing',250);
+INSERT INTO aAvion(tipAvi, fabricant, nrLocuri) VALUES ('A405', 'CLA',120);
+INSERT INTO aAvion(tipAvi, fabricant, nrLocuri) VALUES ('A310','Defiant', 160);
+INSERT INTO aAvion(tipAvi, fabricant, nrLocuri) VALUES ('A425', 'Fairey',180);
+INSERT INTO aCompanie(compID, nume, tel, sediu) VALUES('WIZ', 'Wizzair','3617555240', 'Laurus Offices, Koer 2/A, Budapesta');
+INSERT INTO aCompanie(compID, nume, tel, sediu) VALUES('TAROM', 'TaromRomania', '8493830542', 'Baneasa, Romania');
+INSERT INTO aCompanie(compID, nume, tel, sediu) VALUES('AIR FRANCE', 'AirFrance Romania', '3285702373', 'Tremblay-en-France, FranÈ›a');
+INSERT INTO aDestinatie(destinatieID, oras, tara, numeAeroport) VALUES('NCE', 'Nice', 'Franta', 'Cote dAzur');
+INSERT INTO aDestinatie(destinatieID, oras, tara, numeAeroport) VALUES('AEC', 'Amsterdam', 'Olanda', 'Aeroportul Schiphol');
+INSERT INTO aDestinatie(destinatieID, oras, tara, numeAeroport) VALUES('TAS', 'Toronto', 'Canada', 'Aeroportul Pearson din Toronto');
+INSERT INTO aDestinatie(destinatieID, oras, tara, numeAeroport) VALUES('BTG', 'Bangkok', 'Thailanda', 'Aeroportul Suvarnabhumi');
+INSERT INTO aDestinatie(destinatieID, oras, tara, numeAeroport) VALUES('DAB', 'Dubai', 'Emiratele Arabe Unite', 'Aeroportul International Dubai');
+INSERT INTO aDestinatie(destinatieID, oras, tara, numeAeroport) VALUES('SAP', 'Madrid', 'Spania', 'Aeroportul Barajas');
+INSERT INTO aZbor(zborID, destinatieID, oraPlecare, oraSosire, compID,tipAvi, poarta) VALUES ('W65147', 'NCE', '11:00', '12:30', 'WIZ', 'A320', 'G3');
+INSERT INTO aZbor(zborID, destinatieID, oraPlecare, oraSosire, compID,tipAvi, poarta) VALUES ('W12398', 'AEC', '13:00', '14:30', 'AIR FRANCE', 'A707','H4');
+INSERT INTO aZbor(zborID, destinatieID, oraPlecare, oraSosire, compID,tipAvi, poarta) VALUES ('W64523', 'TAS', '07:00', '08:45', 'TAROM', 'A405', 'D7');
+INSERT INTO aZbor(zborID, destinatieID, oraPlecare, oraSosire, compID,tipAvi, poarta) VALUES ('W88302', 'BTG', '09:00', '09:35', 'AIR FRANCE', 'A310','A9');
+INSERT INTO aZbor(zborID, destinatieID, oraPlecare, oraSosire, compID,tipAvi, poarta) VALUES ('S83856', 'SAP', '15:00', '16:00', 'WIZ', 'A425', 'Q7');
+INSERT INTO aZbor(zborID, destinatieID, oraPlecare, oraSosire, compID,tipAvi, poarta) VALUES ('A07124', 'DAB', '15:05', '17:20', 'WIZ', 'A320', 'E3');
+INSERT INTO aZbor(zborID, destinatieID, oraPlecare, oraSosire, compID,tipAvi, poarta) VALUES ('P74847', 'NCE', '18:10', '18:50', 'TAROM', 'A310', 'E6');
+INSERT INTO aZbor(zborID, destinatieID, oraPlecare, oraSosire, compID,tipAvi, poarta) VALUES ('B23132', 'TAS', '18:55', '19:25', 'TAROM', 'A405', 'R8');
+INSERT INTO aZbor(zborID, destinatieID, oraPlecare, oraSosire, compID,tipAvi, poarta) VALUES ('D75793', 'BTG', '20:00', '20:30', 'AIR FRANCE', 'A707','P5');
+INSERT INTO aZbor(zborID, destinatieID, oraPlecare, oraSosire, compID,tipAvi, poarta) VALUES ('V85765', 'AEC', '19:35', '20:05', 'AIR FRANCE', 'A405','L3');
+INSERT INTO aZbor(zborID, destinatieID, oraPlecare, oraSosire, compID,tipAvi, poarta) VALUES ('A10493', 'SAP', '22:00', '22:55', 'WIZ', 'A707', 'L2');
+INSERT INTO aZbor(zborID, destinatieID, oraPlecare, oraSosire, compID,tipAvi, poarta) VALUES ('K94832', 'DAB', '23:00', '00:00', 'AIR FRANCE', 'A707','L2');
+INSERT INTO aRezervare(zborId, data, cnp, nume, loc) VALUES ('W65147','24.04.2023', '1880526399278', 'Popescu Ion', 14);
+INSERT INTO aRezervare(zborId, data, cnp, nume, loc) VALUES ('W65147','24.04.2023', '1880526399279', 'Ioana Avram', 15);
+INSERT INTO aRezervare(zborId, data, cnp, nume, loc) VALUES ('W12398','25.04.2023', '4838585869688', 'Andrei Popa', 18);
+INSERT INTO aRezervare(zborId, data, cnp, nume, loc) VALUES ('W64523','25.04.2023', '4858696040382', 'Maria Ionescu', 19);
+INSERT INTO aRezervare(zborId, data, cnp, nume, loc) VALUES ('W88302','26.04.2023', '9375828193859', 'Laura Stoica', 20);
+INSERT INTO aRezervare(zborId, data, cnp, nume, loc) VALUES ('S83856','26.04.2023', '4747137265588', 'Elena Gheorghe', 21);
+INSERT INTO aRezervare(zborId, data, cnp, nume, loc) VALUES ('A07124','27.04.2023', '5495751639994', 'Andrei Popescu', 22);
+INSERT INTO aRezervare(zborId, data, cnp, nume, loc) VALUES ('P74847','28.04.2023', '9684728928475', 'Ion Marinescu', 23);
+INSERT INTO aRezervare(zborId, data, cnp, nume, loc) VALUES ('B23132','29.04.2023', '5747289294958', 'Cristian Stanescu', 24);
+INSERT INTO aRezervare(zborId, data, cnp, nume, loc) VALUES ('D75793','30.04.2023', '6884400284855', 'David Popovici', 25);
+INSERT INTO aRezervare(zborId, data, cnp, nume, loc) VALUES ('V85765','01.05.2023', '5848155388901', 'Mircea Stoica', 30);
+INSERT INTO aRezervare(zborId, data, cnp, nume, loc) VALUES ('A10493','02.05.2023', '6578392921935', 'Nicolae Tudor', 31);
+INSERT INTO aRezervare(zborId, data, cnp, nume, loc) VALUES ('K94832','03.05.2023', '5757492030956', 'Valentin Petrescu', 32);
+INSERT INTO aRezervare(zborId, data, cnp, nume, loc) VALUES ('K94832','03.05.2023', '5757492030958', 'Bobu Olimpia', 33);
+INSERT INTO aRezervare(zborId, data, cnp, nume, loc) VALUES ('V85765','01.05.2023', '5848155388959', 'Elena Avram', 37);
+INSERT INTO aRezervare(zborId, data, cnp, nume, loc) VALUES ('W64523','02.05.2023', '8535848599221', 'Victor Stoian', 39);
+INSERT INTO aRezervare(zborId, data, cnp, nume, loc) VALUES ('S83856','26.04.2023', '4747137265583', 'Andrada Maria', 40);
+INSERT INTO aRezervare(zborId, data, cnp, nume, loc) VALUES ('A07124','08.05.2023', '8473899940192', 'Rusescu Alex', 45);
+INSERT INTO aRezervare(zborId, data, cnp, nume, loc) VALUES ('P74847','09.05.2023', '8584837769373', 'Karla Ioana', 46);
+INSERT INTO aRezervare(zborId, data, cnp, nume, loc) VALUES ('D75793','10.05.2023', '6880467757391', 'Alina Ionescu', 47);
+INSERT INTO aRezervare(zborId, data, cnp, nume, loc) VALUES ('B23132','11.05.2023', '5958736525845', 'Carmen Mihai', 48);
+INSERT INTO aRezervare(zborId, data, cnp, nume, loc) VALUES ('W12398','13.05.2023', '8758503285785', 'Corina Tanase', 49);
+INSERT INTO aRezervare(zborId, data, cnp, nume, loc) VALUES ('V85765','14.05.2023', '8594304923493', 'Elena Preda', 50);
+INSERT INTO aRezervare(zborId, data, cnp, nume, loc) VALUES ('S83856','15.05.2023', '3682361873744', 'Maria Dumitru', 51);
+INSERT INTO aRezervare(zborId, data, cnp, nume, loc) VALUES ('A10493','18.05.2023', '9585495734286', 'Erika Maria', 52);
+INSERT INTO aRezervare(zborId, data, cnp, nume, loc) VALUES ('B23132','19.05.2023', '9975853248492', 'Oana Nistor', 53);
+INSERT INTO aRezervare(zborId, data, cnp, nume, loc) VALUES ('P74847','20.05.2023', '1234567899954', 'Raluca Stan', 54);
+INSERT INTO aRezervare(zborId, data, cnp, nume, loc) VALUES ('W65147','21.05.2023', '4829848291355', 'Sorina Olteanu', 55);
+INSERT INTO aRezervare(zborId, data, cnp, nume, loc) VALUES ('K94832','22.05.2023', '5309594828483', 'Patrik Ion', 56);
+INSERT INTO aRezervare(zborId, data, cnp, nume, loc) VALUES ('D75793','30.05.2023', '4991483264638', 'Marius Balan', 60);
+
+SELECT AZ.DESTINATIEID AS DESTINATIE, COUNT(AZ.DESTINATIEID) AS
+NR_ZBORURI,SUM(A.NRLOCURI) AS NR_LOCURI_TOTAL
+FROM AZBOR AZ JOIN AAVION A
+ ON AZ.TIPAVI=A.TIPAVI
+GROUP BY AZ.DESTINATIEID
+
+SELECT AZ.ZBORID,AD.ORAS,AD.TARA,AV.NRLOCURI,COUNT(*) AS NR_REZERVARI
+FROM AZBOR AZ JOIN AREZERVARE AR
+ ON AZ.ZBORID=AR.ZBORID
+ JOIN AAVION AV
+ ON AV.TIPAVI=AZ.TIPAVI
+ JOIN ADESTINATIE AD
+ ON AZ.DESTINATIEID=AD.DESTINATIEID
+GROUP BY AZ.ZBORID,AD.ORAS,AD.TARA,AV.NRLOCURI
