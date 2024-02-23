@@ -1,4 +1,4 @@
-Să se implementeze în APEX tabelele bazei de date împreună cu constrângerile necesare pentru păstrarea integrității bazei de date (chei primare, chei externe, constrângere valori).
+1.Să se implementeze în APEX tabelele bazei de date împreună cu constrângerile necesare pentru păstrarea integrității bazei de date (chei primare, chei externe, constrângere valori).
 CREATE TABLE aAvion(
  tipAvi char(10) NOT NULL,
  fabricant VARCHAR2(255),
@@ -50,7 +50,7 @@ CREATE TABLE aRezervare(
 aZbor(zborId)
 );
 
-Să se adauge în tabelele bazei de date folosind INSERT din SQL: 12 zboruri, 30 rezervări,6 destinații, 3 companii, 5 avioane.
+2.Să se adauge în tabelele bazei de date folosind INSERT din SQL: 12 zboruri, 30 rezervări,6 destinații, 3 companii, 5 avioane.
 INSERT INTO aAvion(tipAvi, fabricant, nrLocuri) VALUES ('A320', 'Airbus',150);
 INSERT INTO aAvion(tipAvi, fabricant, nrLocuri) VALUES ('A707', 'Boeing',250);
 INSERT INTO aAvion(tipAvi, fabricant, nrLocuri) VALUES ('A405', 'CLA',120);
@@ -112,7 +112,7 @@ INSERT INTO aRezervare(zborId, data, cnp, nume, loc) VALUES ('W65147','21.05.202
 INSERT INTO aRezervare(zborId, data, cnp, nume, loc) VALUES ('K94832','22.05.2023', '5309594828483', 'Patrik Ion', 56);
 INSERT INTO aRezervare(zborId, data, cnp, nume, loc) VALUES ('D75793','30.05.2023', '4991483264638', 'Marius Balan', 60);
 
-Să se creeze o pagină APEX pentru Raportare statistici destinații – se va afișa o listă cu:destinație, număr de zboruri spre acea destinație și număr total de locuri in toate avioanele
+3.Să se creeze o pagină APEX pentru Raportare statistici destinații – se va afișa o listă cu:destinație, număr de zboruri spre acea destinație și număr total de locuri in toate avioanele
 care zboară spre acea destinație.
 SELECT AZ.DESTINATIEID AS DESTINATIE, COUNT(AZ.DESTINATIEID) AS
 NR_ZBORURI,SUM(A.NRLOCURI) AS NR_LOCURI_TOTAL
@@ -120,7 +120,7 @@ FROM AZBOR AZ JOIN AAVION A
  ON AZ.TIPAVI=A.TIPAVI
 GROUP BY AZ.DESTINATIEID
 
-Să se creeze o pagină APEX pentru Raportare statistici zboruri – se va afișa o listă cu:zborID, oraș destinație, țară destinație, număr total de locuri in avionul alocat zborului și
+4.Să se creeze o pagină APEX pentru Raportare statistici zboruri – se va afișa o listă cu:zborID, oraș destinație, țară destinație, număr total de locuri in avionul alocat zborului și
 numărul de rezervări pentru acea destinație.
 SELECT AZ.ZBORID,AD.ORAS,AD.TARA,AV.NRLOCURI,COUNT(*) AS NR_REZERVARI
 FROM AZBOR AZ JOIN AREZERVARE AR
