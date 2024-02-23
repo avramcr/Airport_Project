@@ -1,15 +1,4 @@
-1.Să se implementeze în APEX tabelele bazei de date împreună cu constrângerile necesare pentru păstrarea integrității bazei de date (chei primare, chei externe, constrângere valori).
-2.Să se adauge în tabelele bazei de date folosind INSERT din SQL: 12 zboruri, 30 rezervări,6 destinații, 3 companii, 5 avioane.
-3.Să se creeze o pagină APEX pentru Vizualizare zboruri (toate zborurile din baza de date).
-4.Să se creeze o pagină APEX pentru Vizualizare destinații (toate destinațiile din baza de date)
-5.Să se creeze o pagină APEX pentru Vizualizare pasageri (rezervări) care zboară spre o anumită destinație
-6.Să se creeze o pagină APEX pentru Vizualizare zboruri companii în care se vor afișa toate zborurile realizate de o anumită companie
-7.Să se creeze o pagină APEX pentru Adăugare rezervare.
-8.Să se creeze o pagină APEX pentru Raportare statistici destinații – se va afișa o listă cu:destinație, număr de zboruri spre acea destinație și număr total de locuri in toate avioanele
-care zboară spre acea destinație.
-9.Să se creeze o pagină APEX pentru Raportare statistici zboruri – se va afișa o listă cu:zborID, oraș destinație, țară destinație, număr total de locuri in avionul alocat zborului și
-numărul de rezervări pentru acea destinație.
-
+Să se implementeze în APEX tabelele bazei de date împreună cu constrângerile necesare pentru păstrarea integrității bazei de date (chei primare, chei externe, constrângere valori).
 CREATE TABLE aAvion(
  tipAvi char(10) NOT NULL,
  fabricant VARCHAR2(255),
@@ -61,20 +50,24 @@ CREATE TABLE aRezervare(
 aZbor(zborId)
 );
 
+Să se adauge în tabelele bazei de date folosind INSERT din SQL: 12 zboruri, 30 rezervări,6 destinații, 3 companii, 5 avioane.
 INSERT INTO aAvion(tipAvi, fabricant, nrLocuri) VALUES ('A320', 'Airbus',150);
 INSERT INTO aAvion(tipAvi, fabricant, nrLocuri) VALUES ('A707', 'Boeing',250);
 INSERT INTO aAvion(tipAvi, fabricant, nrLocuri) VALUES ('A405', 'CLA',120);
 INSERT INTO aAvion(tipAvi, fabricant, nrLocuri) VALUES ('A310','Defiant', 160);
 INSERT INTO aAvion(tipAvi, fabricant, nrLocuri) VALUES ('A425', 'Fairey',180);
+
 INSERT INTO aCompanie(compID, nume, tel, sediu) VALUES('WIZ', 'Wizzair','3617555240', 'Laurus Offices, Koer 2/A, Budapesta');
 INSERT INTO aCompanie(compID, nume, tel, sediu) VALUES('TAROM', 'TaromRomania', '8493830542', 'Baneasa, Romania');
 INSERT INTO aCompanie(compID, nume, tel, sediu) VALUES('AIR FRANCE', 'AirFrance Romania', '3285702373', 'Tremblay-en-France, FranÈ›a');
+
 INSERT INTO aDestinatie(destinatieID, oras, tara, numeAeroport) VALUES('NCE', 'Nice', 'Franta', 'Cote dAzur');
 INSERT INTO aDestinatie(destinatieID, oras, tara, numeAeroport) VALUES('AEC', 'Amsterdam', 'Olanda', 'Aeroportul Schiphol');
 INSERT INTO aDestinatie(destinatieID, oras, tara, numeAeroport) VALUES('TAS', 'Toronto', 'Canada', 'Aeroportul Pearson din Toronto');
 INSERT INTO aDestinatie(destinatieID, oras, tara, numeAeroport) VALUES('BTG', 'Bangkok', 'Thailanda', 'Aeroportul Suvarnabhumi');
 INSERT INTO aDestinatie(destinatieID, oras, tara, numeAeroport) VALUES('DAB', 'Dubai', 'Emiratele Arabe Unite', 'Aeroportul International Dubai');
 INSERT INTO aDestinatie(destinatieID, oras, tara, numeAeroport) VALUES('SAP', 'Madrid', 'Spania', 'Aeroportul Barajas');
+
 INSERT INTO aZbor(zborID, destinatieID, oraPlecare, oraSosire, compID,tipAvi, poarta) VALUES ('W65147', 'NCE', '11:00', '12:30', 'WIZ', 'A320', 'G3');
 INSERT INTO aZbor(zborID, destinatieID, oraPlecare, oraSosire, compID,tipAvi, poarta) VALUES ('W12398', 'AEC', '13:00', '14:30', 'AIR FRANCE', 'A707','H4');
 INSERT INTO aZbor(zborID, destinatieID, oraPlecare, oraSosire, compID,tipAvi, poarta) VALUES ('W64523', 'TAS', '07:00', '08:45', 'TAROM', 'A405', 'D7');
@@ -87,6 +80,7 @@ INSERT INTO aZbor(zborID, destinatieID, oraPlecare, oraSosire, compID,tipAvi, po
 INSERT INTO aZbor(zborID, destinatieID, oraPlecare, oraSosire, compID,tipAvi, poarta) VALUES ('V85765', 'AEC', '19:35', '20:05', 'AIR FRANCE', 'A405','L3');
 INSERT INTO aZbor(zborID, destinatieID, oraPlecare, oraSosire, compID,tipAvi, poarta) VALUES ('A10493', 'SAP', '22:00', '22:55', 'WIZ', 'A707', 'L2');
 INSERT INTO aZbor(zborID, destinatieID, oraPlecare, oraSosire, compID,tipAvi, poarta) VALUES ('K94832', 'DAB', '23:00', '00:00', 'AIR FRANCE', 'A707','L2');
+
 INSERT INTO aRezervare(zborId, data, cnp, nume, loc) VALUES ('W65147','24.04.2023', '1880526399278', 'Popescu Ion', 14);
 INSERT INTO aRezervare(zborId, data, cnp, nume, loc) VALUES ('W65147','24.04.2023', '1880526399279', 'Ioana Avram', 15);
 INSERT INTO aRezervare(zborId, data, cnp, nume, loc) VALUES ('W12398','25.04.2023', '4838585869688', 'Andrei Popa', 18);
@@ -118,12 +112,16 @@ INSERT INTO aRezervare(zborId, data, cnp, nume, loc) VALUES ('W65147','21.05.202
 INSERT INTO aRezervare(zborId, data, cnp, nume, loc) VALUES ('K94832','22.05.2023', '5309594828483', 'Patrik Ion', 56);
 INSERT INTO aRezervare(zborId, data, cnp, nume, loc) VALUES ('D75793','30.05.2023', '4991483264638', 'Marius Balan', 60);
 
+Să se creeze o pagină APEX pentru Raportare statistici destinații – se va afișa o listă cu:destinație, număr de zboruri spre acea destinație și număr total de locuri in toate avioanele
+care zboară spre acea destinație.
 SELECT AZ.DESTINATIEID AS DESTINATIE, COUNT(AZ.DESTINATIEID) AS
 NR_ZBORURI,SUM(A.NRLOCURI) AS NR_LOCURI_TOTAL
 FROM AZBOR AZ JOIN AAVION A
  ON AZ.TIPAVI=A.TIPAVI
 GROUP BY AZ.DESTINATIEID
 
+Să se creeze o pagină APEX pentru Raportare statistici zboruri – se va afișa o listă cu:zborID, oraș destinație, țară destinație, număr total de locuri in avionul alocat zborului și
+numărul de rezervări pentru acea destinație.
 SELECT AZ.ZBORID,AD.ORAS,AD.TARA,AV.NRLOCURI,COUNT(*) AS NR_REZERVARI
 FROM AZBOR AZ JOIN AREZERVARE AR
  ON AZ.ZBORID=AR.ZBORID
